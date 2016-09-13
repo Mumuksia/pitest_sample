@@ -7,12 +7,15 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10')
+
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: "info.solidsoft.pitest"
 
 jar {
     baseName = 'yuriy'
@@ -25,8 +28,20 @@ repositories {
     mavenCentral()
 }
 
+task stage {
+    dependsOn build
+}
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
+    testCompile('org.easymock:easymock:3.4')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+pitest {
+    targetClasses = ['com.mutant.*']
+    pitestVersion = "1.1.10"
+    threads = 4
+    outputFormats = ['XML', 'HTML']
 }
