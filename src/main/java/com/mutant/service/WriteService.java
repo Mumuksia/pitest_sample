@@ -1,7 +1,9 @@
 package com.mutant.service;
 
+import com.mutant.dummy.DummyService;
+
 /**
- * User: Muksia
+ * User: Yuriy
  * Date: 14/09/16
  * Time: 00:35
  */
@@ -11,6 +13,7 @@ public class WriteService {
         if (correct.isEmpty())
             return false;
         someSuperMethodToProceedWithInput(correct);
+        DummyService.dummyCall();
         return true;
     }
 

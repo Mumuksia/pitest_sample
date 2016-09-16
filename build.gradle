@@ -40,7 +40,8 @@ dependencies {
 }
 
 pitest {
-    targetClasses = ['com.mutant.*']
+    targetClasses = ['com.mutant.service.*']
+    avoidCallsTo = ['com.mutant.dummy.DummyService']
     pitestVersion = "1.1.10"
     threads = 4
     outputFormats = ['XML', 'HTML']
